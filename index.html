@@ -111,7 +111,7 @@ function create_Cells () {
 const pixels = Array.from(document.querySelectorAll(".cell"));
 
 
-pixels.forEach(cell => cell.addEventListener('click', () => {
+pixels.forEach(cell => cell.addEventListener('mouseover', () => {
     change_PixColor(cell.id);
     console.log(cell.id);
 }));}
