@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Etch-a-Sketch... Into Dreams</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<img src="logo.png">
+
+  <div class="btn_container">
+
+    <div class="input-color-container">
+      <input type="color" id="colorPicker">
+    </div>
+
+    <div class="erase_container">
+      <button id="eraser" onclick="eraseGrid()">Erase Grid</button>
+    </div>
+
+  </div>
+
+  <div class="overlay">
+    <div class="container" id="overlay"></div>
+  </div>
+
+    <div class="slideContainer">
+      <center><span >Drag slider to change grid size</span></center>
+        <input type="range" min="8" max="64" value="16" step="8" class="myslider" id="sliderRange">
+        <center><div id="slidervalue"></div></center>
+        
+      </div>
+
+
+
+
+
+<script>
+
+//Default values on load
+let DEFAULT_SIZE = 16;
+let grid_currentSize = DEFAULT_SIZE;
+
+let DEFAULT_COLOR = "BLUE";
+let cell_currentColor = DEFAULT_COLOR;
+
+
+// Color related variables
+const colorInput = document.querySelector("#colorPicker");
+const eraser = document.querySelector("#eraser");
+
+
+// Slider range related variables
+const slider = document.getElementById("sliderRange");
+const output = document.getElementById("slidervalue");
+output.innerHTML = `${slider.value}` + 'X' + `${slider.value}`;
+
+
+
+
+  
+function update_Slider(value) {
+output.innerHTML = `${value}` + 'X' + `${value}`;
+}
+
+function update_CellColor (colorValue) {
+  cell_currentColor = colorValue;
+}
+
+function update_GridSize (newValue) {
+  grid_currentSize = newValue;
+  reset_Grid();
+  createGrid(grid_currentSize);
+}
+
+function createGrid (n) {
+
+    const container = document.querySelector(".container");
+
+    container.style.gridTemplateColumns = `repeat(${grid_currentSize}, 1fr)`
+    container.style.gridTemplateRows = `repeat(${grid_currentSize}, 1fr)`
+
+    for (let i = 0; i < (n * n); i++) {
+        let cell = document.createElement("div");
+        cell.className = "cell";
+        cell.id = `cell${i}`;
+        cell.data_coloredFlag = `0`;
+        container.appendChild(cell);
+        
+    }
+    create_Cells();
+}
+
+function change_PixColor (cell_IDNum) {
+
+    const TargetCell = document.querySelector(`#${cell_IDNum}`);
+
+
+
+
+        TargetCell.style.cssText = `background-color: ${cell_currentColor}`;
+        TargetCell.data_coloredFlag = '1'; 
+
+          console.log(TargetCell.style.cssText); 
+    
+
+}
+
+function create_Cells () {
+
+const pixels = Array.from(document.querySelectorAll(".cell"));
+
+
+pixels.forEach(cell => cell.addEventListener('click', () => {
+    change_PixColor(cell.id);
+    console.log(cell.id);
+}));}
+
+function reset_Grid() {
+  document
+  .querySelectorAll(".cell")
+  .forEach((e) => e.parentNode.removeChild(e))
+}
+
+function eraseGrid() {
+  
+  const pixels = Array.from(document.querySelectorAll(".cell"));
+  pixels.forEach(cell => cell.style.backgroundColor = "white");
+
+}
+
+function on() {
+  document.getElementById("overlay").style.display = "block";
+}
+
+function off() {
+  document.getElementById("overlay").style.display = "none";
+}
+
+
+
+//************************************************************
+// MAIN LOGIC
+
+colorInput.oninput = (e) => update_CellColor(e.target.value);
+slider.onchange = (e) => update_Slider(e.target.value);
+slider.oninput = (e) => update_GridSize(e.target.value);
+
+
+
+window.onload = () => {
+  createGrid (DEFAULT_SIZE);
+}
+
+</script>
+
+</body>
+</html>
