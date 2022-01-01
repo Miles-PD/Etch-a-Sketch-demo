@@ -1,0 +1,123 @@
+body {
+    background-color: black;
+    margin: 0;
+    padding: 30px;
+    background-image: linear-gradient(#000000, #403042, #5c045f);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.container {
+    position: absolute;
+    display: inline-grid;
+    border: solid, darkgreen;
+    grid-gap: 1px;
+    width: 600px;
+    height: 600px;
+    opacity: 0.2;
+}
+
+
+.overlay {
+    position: relative;
+    width: 600px;
+    height: 600px;
+    top: 0;
+    left: 0;
+    z-index: 0;
+    background-image: url("sonic.png");
+}
+
+.btn_container {
+    display: flex;
+    flex-direction: row;
+    width: 700px;
+    height: 50px;
+    justify-content: space-evenly;
+    align-items: center;
+
+}
+
+
+#eraser {background-image: linear-gradient(to right, #c8ff00 0%, #f84600  51%, #ae00da  100%)}
+#eraser {
+   margin: 10px;
+   padding: 15px 45px;
+   text-align: center;
+   text-transform: uppercase;
+   transition: 0.5s;
+   background-size: 200% auto;
+   color: white;            
+   box-shadow: 0 0 20px #eee;
+   border-radius: 10px;
+   display: block;
+ }
+
+ #eraser:hover {
+   background-position: right center; /* change the direction of the change here */
+   color: #fff;
+   text-decoration: none;
+ }
+
+
+.input-color-container {
+    position: relative;
+    overflow: hidden;
+    width: 40px;
+    height: 40px;
+    border: solid 2px #ddd;
+    border-radius: 40px;
+}
+
+#colorPicker {
+    position: absolute;
+    right: -8px;
+    top: -8px;
+    width: 56px;
+    height: 56px;
+    border: none;
+}
+    
+.cell {
+ 
+    padding: 0;
+    margin: 0;
+    background-color: white;
+
+}
+
+#slidervalue {
+    color:white;
+}
+
+.myslider {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 10px;
+    border-radius: 5px;
+    background: #eea300;
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+  }
+
+
+.myslider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    height: 30px;
+    width: 30px;
+    background: rgb(255, 0, 43);
+    border-radius: 50%;
+  }
+
+.myslider::-moz-range-thumb {
+    height: 15px;
+    width: 15px;
+    background: pink;
+    margin-top: -5px;
+    border-radius: 50%;
+  }
